@@ -8,3 +8,21 @@ Caraca o Vim vai me desculpar, mas não tem como usar Java no Vim o IntelliJ é 
 
 ### Explicações inesperadas de um spring selvagem
 Por baixo dos panoes o Spring tem um recurso que se chama DispatcherServlet e sempre que a gente envia requisições pro server, esse cara que recebe e ele faz ali uma especie de roteamento para qual Controller que vai receber e responder a solicitação... (posso ta pensando merda mas me parece muito com o express do node, porém javascript para backend é aquilo né, pior que isso só vibecodando mesmo kkk)
+
+### Testar a API
+
+```bash
+curl --request POST \
+  --url http://localhost:8080/parking-spot \
+  --header 'Content-Type: application/json' \
+  --data '{
+	"parkingSpotNumber": "2058",
+	"licensePlateCar": "RRS8562",
+	"brandCar": "Audi",
+	"modelCar": "q5",
+	"colorCar": "black",
+	"responsibleName": "Matheus Braga",
+	"apartment": "205",
+	"block": "0"
+}'
+```
