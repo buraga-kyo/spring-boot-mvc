@@ -58,4 +58,6 @@ public class ParkingSpotController {
     public ResponseEntity<List<ParkingSpotModel>> getAllParkingSpots(){
         return ResponseEntity.status(HttpStatus.OK).body(parkingSpotService.findAll());
     }
+
+    
 }
