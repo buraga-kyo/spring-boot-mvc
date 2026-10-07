@@ -26,3 +26,6 @@ curl --request POST \
 	"block": "0"
 }'
 ```
+
+### Notas sobre a aula
+Bom foi uma aula de 2 horas que demorei 3 dias pra fazer kkk bem antiga de 2022 e tive a boa sensação de estar vendo um conteudo organico sem AI Slop; Desde que trabalhei com jogos e um sistema de assinatura a um tempo atrás não mexia com java e nunca tinha mexido com spring boot, o Java para web... esse projeto foi um CRUD bem baisco, achei alguns problemas de segurança no projeto e acho que cheguei a comentar que esperava que ela ensinasse ainda nessa aula a não colocar os dados sensiveis como strings puras em application.properties, ela não mencionou nada sobre Headers nem variavel ambiente mas foi valioso fazer o primeiro CRUD em Java com um conteudo bem organico e dedicado.
