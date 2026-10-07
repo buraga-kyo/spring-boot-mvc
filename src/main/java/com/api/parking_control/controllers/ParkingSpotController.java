@@ -36,7 +36,7 @@ public class ParkingSpotController {
         if(parkingSpotService.existsByLicensePlateCar(parkingSpotDto.getLicensePlateCar())){
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflito: licensePlateCar já existe!");
         }
-        if(parkingSpotService.existsParkingSpotNumber(parkingSpotDto.getParkingSpotNumber())){
+        if(parkingSpotService.existsByParkingSpotNumber(parkingSpotDto.getParkingSpotNumber())){
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflito: parkingSpotNumber já existe!");
         }
         if(parkingSpotService.existsByApartmentAndBlock(parkingSpotDto.getApartment(), parkingSpotDto.getBlock())){
