@@ -32,6 +32,17 @@ public class ParkingSpotController {
 
     /* Sem o @Valid ele não "ativa" as validações do DTO, ainda não pesquisei porque disso, enfim só aceitei, colocar @Valid... */
     public ResponseEntity<Object> saveParkingSpot(@RequestBody @Valid ParkingSpotDto parkingSpotDto){
+
+        if(parkingSpotService.existsByLicensePlateCar(parkingSpotDto.getLicensePlateCar())){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflito: licensePlateCar já existe!");
+        }
+        if(parkingSpotService.existsParkingSpotNumber(parkingSpotDto.getParkingSpotNumber())){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflito: parkingSpotNumber já existe!");
+        }
+        if(parkingSpotService.existsByApartmentAndBlock(parkingSpotDto.getApartment(), parkingSpotDto.getBlock())){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflito: apartment já existe!");
+        }
+
         var parkingSpotModel = new ParkingSpotModel();
 
         /* Converter de DTO para Model */
