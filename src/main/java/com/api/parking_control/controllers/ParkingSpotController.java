@@ -2,10 +2,18 @@ package com.api.parking_control.controllers;
 
 /* Essa classe também é um bean do spring o @RestController */
 
+import com.api.parking_control.dtos.ParkingSpotDto;
+import com.api.parking_control.models.ParkingSpotModel;
 import com.api.parking_control.services.ParkingSpotService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
+import org.springframework.beans.BeanUtils;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import tools.jackson.databind.util.BeanUtil;
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -16,6 +24,22 @@ public class ParkingSpotController {
 
     public ParkingSpotController(ParkingSpotService parkingSpotService) {
         this.parkingSpotService = parkingSpotService;
+    }
+
+    /* Aqui não precisa definir uri porque aqui no spring a gente definiu ali nha linha 20, no caso sempre que for um POST
+    * em /parking-spot ele ja localiza automaticamente */
+    @PostMapping
+
+    /* Sem o @Valid ele não "ativa" as validações do DTO, ainda não pesquisei porque disso, enfim só aceitei, colocar @Valid... */
+    public ResponseEntity<Object> saveParkingSpot(@RequestBody @Valid ParkingSpotDto parkingSpotDto){
+        var parkingSpotModel = new ParkingSpotModel();
+
+        /* Converter de DTO para Model */
+        BeanUtils.copyProperties(parkingSpotDto, parkingSpotModel);
+
+        /* A senhorita ensinou a colocar a geração de data aqui chamando uma função, poderia ja usar o proprio banco para cuidar disso não? ISO 8601 */
+        parkingSpotModel.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
+        return ResponseEntity.status(HttpStatus.CREATED).body(parkingSpotService.save(parkingSpotModel));
     }
 
 }
